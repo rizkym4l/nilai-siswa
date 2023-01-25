@@ -1,5 +1,8 @@
 
 
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,10 +15,10 @@
 <body>
 
 <div class="form-container">
-  <form action="#" method="post">
+  <form action="" method="get">
   </script>
     <h3><center>Input Data Diri</center></h3>
-    <center><form action= "#" method = "post" name = "input1">
+    <center><form action= "#" method = "get" name = "input1">
     <!-- <input type="text"   name="nama" required placeholder="Masukkan Nama"> -->
     <input type="text" name="nama"  required placeholder="Input Nama">
     <input type="date" name="date"  required placeholder="Tanggal Lahir">
@@ -30,27 +33,41 @@
     <input type="number" name="ang5" required placeholder="Input Nilai Pipas">
     <input type="number" name="ang6" required placeholder="Input Nilai PP">
     <input type="submit" name="submit" value="Submit" class="form-btn">
+</form>
   <?php
-  
-if($_SERVER['REQUEST_METHOD'] == "POST") {
-  $nam = $_POST["nama"];
-  $ttl = $_POST["date"];
-  $jurusan = $_POST["jur"];
-  $ray = $_POST["ray"];
-  $num = $_POST["ang"];
-  $num2 = $_POST["ang1"];
-  $num3 = $_POST["ang2"];
-  $num4 = $_POST["ang3"];
-  $num5 = $_POST["ang4"];
-  $num6 = $_POST["ang5"];
-  $num7 = $_POST["ang6"];
+  $server  = mysqli_connect("localhost", "root", "", "phpdasar");
+  if($server) {
+    echo "<center><b>Selamat Datang!</b></center>";
+  }
+  else{
+    echo "gagal :(";
+  }
+if($_SERVER['REQUEST_METHOD'] == "GET") {
+  $nam = $_GET["nama"];
+  $ttl = $_GET["date"];
+  $jur = $_GET["jur"];
+  $ray = $_GET["ray"];
+  $num = $_GET["ang"];
+  $num2 = $_GET["ang1"];
+  $num3 = $_GET["ang2"];
+  $num4 = $_GET["ang3"];
+  $num5 = $_GET["ang4"];
+  $num6 = $_GET["ang5"];
+  $num7 = $_GET["ang6"];
   $max = max($num, $num2, $num3, $num4, $num5, $num6, $num7);
   $min = min($num, $num2, $num3, $num4, $num5, $num6, $num7);
   $rata = $num + $num2 + $num3 + $num4 + $num5 + $num6 + $num7;
   $rata = $rata / 7;
   $h = round($rata);
+  
+$sql = "INSERT INTO data_siswa(nama, ttl,jurusan,rayon,n1,n2,n3,n4,n5,n6,n7) Values
+('$nam','$ttl','$jur','$ray','$num','$num2','$num3','$num4','$num5','$num6','$num7')";
+if (mysqli_query($server, $sql)) {
+  echo "y";
+
+}
   echo " <center><table><tr><th> Nama </th><th> Tanggal Lahir </th><th>Rayon<th>Jurusan</th></th></tr>
-  <td><font style ='color:red'><b>$nam</b></font><td>$ttl</td><td>$ray</td><td>$jurusan</td></td></td></table></center>
+  <td><font style ='color:red'><b>$nam</b></font><td>$ttl</td><td>$ray</td><td>$jur</td></td></td></table></center>
   <center><table><th> Kimia </th><th> Ips </th><th> DPK </th><th> Fisika </th><th>Biologi</th><th>Pipas</th><th>PP</th></th></tr></center>
   <td>$num</td><td>$num2</td><td>$num3</td><td>$num4</td><td>$num5</td><td>$num6</td><td>$num7</td></table>";
   echo "<center><table><tr><th>Nilai Maximal :</th><td>$max</td><th>Nilai Minimal :</th><td>$min</td></tr></table></center>";
@@ -76,11 +93,13 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
   } 
   echo "</tr></table>";
 }
+
 ?> <br>
   <center><p>There's Something to ask? <a href="https://www.instagram.com/rizkim4l/" target="_blank">DM me!!</a></p></center><br>
+    <center><p>Lihat semua data?<a href="tampil.php">SINI</a></p>
   <p>================================</p>
   <h1>Nama Kelompok</h1>
-  <h2>Muhammad Riesky<br><font style ='color:blue'>Rizki Maulana Arif</font><br>Tensa Anargya Rooseno<br>Khairul Ikhwan<br>Samsul Hidayatullah</h2>
+  <h2>kelompok 12 opet<br><font style ='color:blue'>Rizki Maulana Arif</font><br>Dion Sultan Nasution<br>Muhammad fadly opet <br>Muhammad Fazri Ramdani<br>Simon </h2>
   <!-- <span class ="#"><a href ="#">Reset</a></span> -->
 </form>
 </div>
